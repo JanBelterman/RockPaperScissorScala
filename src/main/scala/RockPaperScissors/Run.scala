@@ -1,13 +1,9 @@
 package RockPaperScissors
 
-import RockPaperScissors.AI.RandomAI
-
 object Run {
 
   def main(args: Array[String]): Unit = {
-    val player1 = new ConsolePlayer()
-    val player2 = new RandomAI
-    val game = new Game(player1, player2)
+    val game = new Game(Players.getConsolePlayerMove, Players.getCounterAIPlayerMove, Rules.classicRules)
 
     var keepPlaying = true
 
