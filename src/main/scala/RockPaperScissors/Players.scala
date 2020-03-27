@@ -62,4 +62,18 @@ object Players {
     }
   }
 
+  @scala.annotation.tailrec
+  def getLastSuccessfulMove(turnHistory: List[TurnResult]): Move = {
+    if (turnHistory.isEmpty) {
+      getRandomAIMove(turnHistory)
+    } else {
+      val head::tail = turnHistory
+      if (head.result == Result.PLAYER1_WON) {
+        head.movePlayer1
+      } else {
+        getLastSuccessfulMove(tail)
+      }
+    }
+  }
+
 }
