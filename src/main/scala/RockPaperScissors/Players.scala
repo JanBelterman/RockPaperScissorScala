@@ -4,7 +4,7 @@ import RockPaperScissors.Move.Move
 
 object Players {
 
-  def askMoveInConsole(): Option[Move] = scala.io.StdIn.readLine("Your turn. Choose ROCK, PAPER or SCISSORS") match {
+  def askMoveInConsole(): Option[Move] = scala.io.StdIn.readLine("Your turn. Choose ROCK, PAPER or SCISSORS\n") match {
     case "ROCK" => Some(Move.ROCK)
     case "PAPER" => Some(Move.PAPER)
     case "SCISSORS" => Some(Move.SCISSORS)
@@ -20,8 +20,18 @@ object Players {
     }
   }
 
-  def getRockAIMove(turnHistory: List[TurnResult]): Move = {
-    Move.ROCK
+  def createStaticAI(move: Move): (List[TurnResult]) => Move = {
+    (turnHistory) => move
+  }
+
+  def createScriptedAI(l: List[Move]): (List[TurnResult]) => Move = {
+    var moves = l
+    (turnHistory) => moves match {
+      case h::Nil => h
+      case h::t =>
+        moves = t
+        h
+    }
   }
 
   @scala.annotation.tailrec
