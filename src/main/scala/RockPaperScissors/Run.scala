@@ -19,9 +19,10 @@ object Run {
     println("Score: " + game.getScorePlayer1() + "-" + game.getScorePlayer2())
 
     println("Keep playing? Y/N")
-    val response =  scala.io.StdIn.readLine()
-    if(response == "N") { }
-    else { gameLoop(game) }
+    scala.io.StdIn.readLine() match {
+      case "N" =>
+      case _ => gameLoop(game)
+    }
   }
 
 }

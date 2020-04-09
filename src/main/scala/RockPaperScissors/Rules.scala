@@ -6,7 +6,7 @@ import RockPaperScissors.Result.Result
 object Rules {
 
   def classicRules(movePlayer1: Move, movePlayer2: Move): Result = {
-    val result = movePlayer1 match {
+    movePlayer1 match {
       case RockPaperScissors.Move.ROCK => movePlayer2 match {
         case RockPaperScissors.Move.ROCK => Result.TIE
         case RockPaperScissors.Move.PAPER => Result.PLAYER2_WON
@@ -23,15 +23,11 @@ object Rules {
         case RockPaperScissors.Move.SCISSORS => Result.TIE
       }
     }
-    result
   }
 
-  def predictRules(movePlayer1: Move, movePlayer2: Move): Result = {
-    if (movePlayer1 == movePlayer2) {
-      Result.PLAYER1_WON
-    } else {
-      Result.PLAYER2_WON
-    }
+  def predictRules(movePlayer1: Move, movePlayer2: Move): Result = movePlayer1 match {
+    case m if (m == movePlayer2) => Result.PLAYER1_WON
+    case _ => Result.PLAYER2_WON
   }
 
 }
