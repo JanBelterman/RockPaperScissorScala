@@ -3,7 +3,11 @@ package RockPaperScissors
 object Run {
 
   def main(args: Array[String]): Unit = {
-    val game = new Game(Players.createScriptedAI(List(Move.ROCK, Move.ROCK, Move.SCISSORS, Move.PAPER)), Players.createStaticAI(Move.PAPER), Rules.classicRules)
+    val game = new Game(
+      Players.createStaticAI(Move.PAPER),
+      Players.applyRandomAICurried(List(Players.getCounterAIPlayerMove, Players.getRandomAIMove)),
+      Rules.classicRules
+    )
 
     println("Starting Rock Paper Scissors Game")
     gameLoop(game)

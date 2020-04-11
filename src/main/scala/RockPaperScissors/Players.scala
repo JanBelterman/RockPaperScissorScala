@@ -65,4 +65,18 @@ object Players {
     case _::t => getLastSuccessfulMove(t)
   }
 
+  def applyRandomAI(aiList: List[(List[TurnResult]) => Move], turnHistory: List[TurnResult]): Move = {
+      aiList match {
+        case Nil => getRandomAIMove(turnHistory)
+        case _ => aiList(scala.util.Random.nextInt(aiList.length))(turnHistory)
+      }
+  }
+
+  def applyRandomAICurried(aiList: List[(List[TurnResult]) => Move])(turnHistory: List[TurnResult]): Move = {
+    aiList match {
+      case Nil => getRandomAIMove(turnHistory)
+      case _ => aiList(scala.util.Random.nextInt(aiList.length))(turnHistory)
+    }
+  }
+
 }
